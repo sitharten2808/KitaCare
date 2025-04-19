@@ -33,36 +33,38 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <LanguageProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <div className="min-h-screen flex flex-col">
-              <Navbar />
-              <Suspense fallback={<Loader />}>
-                <main className="flex-grow">
-                  <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/government-services" element={<GovernmentServices />} />
-                    <Route path="/healthcare" element={<Healthcare />} />
-                    <Route path="/community" element={<Community />} />
-                    <Route path="/employment" element={<Employment />} />
-                    <Route path="/digital" element={<Digital />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </main>
-              </Suspense>
-              <Footer />
-            </div>
-          </BrowserRouter>
-        </TooltipProvider>
-      </LanguageProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <LanguageProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <div className="min-h-screen flex flex-col">
+                <Navbar />
+                <Suspense fallback={<Loader />}>
+                  <main className="flex-grow">
+                    <Routes>
+                      <Route path="/" element={<Index />} />
+                      <Route path="/government-services" element={<GovernmentServices />} />
+                      <Route path="/healthcare" element={<Healthcare />} />
+                      <Route path="/community" element={<Community />} />
+                      <Route path="/employment" element={<Employment />} />
+                      <Route path="/digital" element={<Digital />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </main>
+                </Suspense>
+                <Footer />
+              </div>
+            </BrowserRouter>
+          </TooltipProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
