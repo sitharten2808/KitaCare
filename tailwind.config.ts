@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -132,7 +131,8 @@ export default {
 				'scale-in': 'scale-in 0.3s ease-out forwards'
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				heading: ['Playfair Display', 'serif'],
 			}
 		}
 	},
