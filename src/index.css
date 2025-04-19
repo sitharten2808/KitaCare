@@ -131,4 +131,34 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .glass-effect {
+    @apply backdrop-blur-lg bg-white/10 border border-white/20;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-kitacare-blue focus:ring-offset-2 focus:ring-offset-background;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply px-4 py-2 rounded-md transition-colors hover:bg-muted focus-ring;
+  }
+
+  .btn-primary {
+    @apply bg-kitacare-blue text-white px-4 py-2 rounded-md hover:bg-blue-600 focus-ring;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground px-4 py-2 rounded-md hover:bg-secondary/80 focus-ring;
+  }
+
+  .card-base {
+    @apply rounded-xl p-6 glass-effect card-hover;
+  }
 }
