@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
@@ -26,23 +25,23 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-background border-b border-border">
-      <div className="container flex items-center justify-between h-16 mx-auto px-4">
+    <nav className="sticky top-0 z-50 w-full bg-background border-b border-border transition-colors duration-200">
+      <div className="flex items-center justify-between h-16 px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-kitacare-blue rounded-md flex items-center justify-center">
             <span className="text-white font-bold">KC</span>
           </div>
-          <span className="font-bold text-xl">KitaCare</span>
+          <span className="font-bold text-xl text-foreground">KitaCare</span>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
             <Link 
               key={link.path} 
               to={link.path}
-              className="hover:text-kitacare-purple transition-colors flex items-center gap-1"
+              className="text-foreground hover:text-kitacare-purple transition-colors flex items-center gap-2 text-sm font-medium"
             >
               <span>{link.icon}</span>
               <span>{link.name}</span>
@@ -51,21 +50,21 @@ const Navbar = () => {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center space-x-4">
           {/* Language Selector */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
+              <Button variant="ghost" size="icon" className="rounded-full text-foreground hover:bg-accent">
                 <Globe className="h-5 w-5" />
                 <span className="sr-only">Change Language</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="bg-background border-border">
               {Object.values(languages).map((lang) => (
                 <DropdownMenuItem 
                   key={lang.code} 
                   onClick={() => changeLanguage(lang.code)}
-                  className={currentLanguage === lang.code ? "bg-accent" : ""}
+                  className={`${currentLanguage === lang.code ? "bg-accent" : ""} text-foreground`}
                 >
                   <span className="mr-2">{lang.flag}</span>
                   <span>{lang.name}</span>
@@ -79,7 +78,7 @@ const Navbar = () => {
             variant="ghost" 
             size="icon" 
             onClick={toggleTheme}
-            className="rounded-full"
+            className="rounded-full text-foreground hover:bg-accent"
           >
             {theme === 'light' ? (
               <Moon className="h-5 w-5" />
@@ -94,7 +93,7 @@ const Navbar = () => {
             variant="ghost" 
             size="icon" 
             onClick={() => setIsMenuOpen(!isMenuOpen)} 
-            className="md:hidden rounded-full"
+            className="md:hidden rounded-full text-foreground hover:bg-accent"
           >
             {isMenuOpen ? (
               <X className="h-5 w-5" />
@@ -109,12 +108,12 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-background border-b border-border animate-fade-in">
-          <div className="container px-4 py-4">
+          <div className="px-6 py-4">
             {navLinks.map((link) => (
               <Link 
                 key={link.path} 
                 to={link.path}
-                className="block py-3 hover:text-kitacare-purple transition-colors flex items-center gap-2"
+                className="block py-3 text-foreground hover:text-kitacare-purple transition-colors flex items-center gap-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span>{link.icon}</span>

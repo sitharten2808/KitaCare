@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { services } from '../config/services';
 
 const Index = () => {
   const { t } = useLanguage();
@@ -26,7 +27,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 to-blue-900 text-white">
         <div className="absolute inset-0 bg-black/40"></div>
@@ -49,14 +50,14 @@ const Index = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-muted">
         <div className="container px-4">
-          <h2 className="text-center font-heading mb-16">{t('about_title')}</h2>
+          <h2 className="text-center font-heading mb-16 text-foreground">{t('about_title')}</h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {features.map((feature, index) => (
-              <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow">
+              <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow bg-card">
                 <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-heading mb-3">{feature.title}</h3>
+                <h3 className="text-xl font-heading mb-3 text-foreground">{feature.title}</h3>
                 <p className="text-muted-foreground font-body">{feature.description}</p>
               </Card>
             ))}
@@ -65,16 +66,16 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20">
+      <section className="py-20 bg-background">
         <div className="container px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Service categories with their icons and colors */}
-            <Card className="col-span-1 md:col-span-1 row-span-1 md:row-span-1 md:col-start-2 md:row-start-2 flex items-center justify-center p-6 shadow-md hover:shadow-xl transition-all border-2 border-kitacare-blue">
+            <Card className="col-span-1 md:col-span-1 row-span-1 md:row-span-1 md:col-start-2 md:row-start-2 flex items-center justify-center p-6 shadow-md hover:shadow-xl transition-all border-2 border-kitacare-blue bg-card">
               <div className="flex flex-col items-center space-y-4">
                 <div className="w-24 h-24 bg-kitacare-blue rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-3xl">KC</span>
                 </div>
-                <h2 className="text-2xl font-bold">KitaCare Hub</h2>
+                <h2 className="text-2xl font-bold text-foreground">KitaCare Hub</h2>
               </div>
             </Card>
             
@@ -93,6 +94,7 @@ const Index = () => {
                     animate-scale-in
                     border-t-4 ${service.color}
                     shadow-md hover:shadow-xl
+                    bg-card
                   `}>
                     <div className="flex justify-between items-start">
                       <span className="text-3xl">{service.icon}</span>
@@ -101,7 +103,7 @@ const Index = () => {
                       </span>
                     </div>
                     <div className="mt-4">
-                      <h3 className="text-xl font-bold">{service.title}</h3>
+                      <h3 className="text-xl font-bold text-foreground">{service.title}</h3>
                       <p className="text-muted-foreground mt-2 text-sm">{service.description}</p>
                     </div>
                   </Card>
@@ -112,28 +114,28 @@ const Index = () => {
         </div>
       </section>
 
-      <div className="mt-16 text-center animate-fade-in delay-300">
-        <h2 className="text-2xl font-bold mb-4">How KitaCare Helps You</h2>
+      <div className="mt-16 text-center animate-fade-in delay-300 bg-background">
+        <h2 className="text-2xl font-bold mb-4 text-foreground">How KitaCare Helps You</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           <div className="p-4">
             <div className="bg-secondary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">🔍</span>
             </div>
-            <h3 className="text-xl font-bold">Easy Access</h3>
+            <h3 className="text-xl font-bold text-foreground">Easy Access</h3>
             <p className="text-muted-foreground mt-2">Simple interface designed for users with varying digital literacy.</p>
           </div>
           <div className="p-4">
             <div className="bg-secondary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">🌐</span>
             </div>
-            <h3 className="text-xl font-bold">Multilingual Support</h3>
+            <h3 className="text-xl font-bold text-foreground">Multilingual Support</h3>
             <p className="text-muted-foreground mt-2">Content available in Bahasa Malaysia, English, Chinese, and Tamil.</p>
           </div>
           <div className="p-4">
             <div className="bg-secondary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">📱</span>
             </div>
-            <h3 className="text-xl font-bold">Mobile Friendly</h3>
+            <h3 className="text-xl font-bold text-foreground">Mobile Friendly</h3>
             <p className="text-muted-foreground mt-2">Access services from any device, anytime, anywhere.</p>
           </div>
         </div>

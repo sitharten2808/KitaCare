@@ -1,4 +1,3 @@
-
 import React, { Suspense } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -42,7 +41,7 @@ const App = () => {
             <Toaster />
             <Sonner />
             <BrowserRouter>
-              <div className="min-h-screen flex flex-col">
+              <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-200">
                 <Navbar />
                 <Suspense fallback={<Loader />}>
                   <main className="flex-grow">
