@@ -1,83 +1,95 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 
 const Digital = () => {
   const { t } = useLanguage();
-  
+  const navigate = useNavigate();
+  const [aiProgress, setAiProgress] = useState(0);
+
+  // Load AI learning progress from localStorage
+  useEffect(() => {
+    const savedProgress = localStorage.getItem('aiLearningProgress');
+    if (savedProgress) {
+      setAiProgress(parseInt(savedProgress));
+    }
+  }, []);
+
   const resources = [
     {
-      title: 'Computer Basics',
-      description: 'Learn how to use computers, laptops, and basic software.',
-      icon: '💻',
-      level: 'Beginner',
-      format: 'Video Tutorials'
+      title: t('AI'),
+      description: t('AI_desc'),
+      icon: '🤖',
+      level: t('basic_skills'),
+      format: t('digital_tools'),
+      onClick: () => navigate('/ai-learning'),
+      progress: aiProgress
     },
     {
-      title: 'Smartphone Usage',
-      description: 'How to use smartphones, important apps, and settings.',
+      title: t('Smartphone_usage'),
+      description: t('smartphone_desc'),
       icon: '📱',
-      level: 'Beginner',
-      format: 'Interactive Guide'
+      level: t('basic_skills'),
+      format: t('practice_exercises')
     },
     {
-      title: 'Internet Safety',
-      description: 'Stay safe online and protect yourself from scams.',
+      title: t('online_safety'),
+      description: t('safety_desc'),
       icon: '🔒',
-      level: 'Intermediate',
-      format: 'Online Course'
+      level: t('basic_skills'),
+      format: t('safety')
     },
     {
-      title: 'Government E-Services',
-      description: 'How to access and use online government services.',
-      icon: '🏛️',
-      level: 'Intermediate',
-      format: 'Step-by-step Guide'
+      title: t('online_services'),
+      description: t('online_desc'),
+      icon: '🔎',
+      level: t('basic_skills'),
+      format: t('practice_exercises')
     },
     {
-      title: 'Digital Communication',
-      description: 'Learn to use email, messaging apps, and video calls.',
-      icon: '📧',
-      level: 'Beginner',
-      format: 'Hands-on Workshop'
+      title: t('online_payment'),
+      description: t('payment_desc'),
+      icon: '💳',
+      level: t('basic_skills'),
+      format: t('digital_tools')
     },
     {
-      title: 'Online Banking',
-      description: 'Safely manage your finances through online banking.',
-      icon: '🏦',
-      level: 'Intermediate',
-      format: 'Video Tutorials'
+      title: t('maps'),
+      description: t('maps_desc'),
+      icon: '🗺️',
+      level: t('basic_skills'),
+      format: t('practice_exercises')
     },
     {
-      title: 'Social Media Basics',
-      description: 'Connect with family and friends through social media platforms.',
-      icon: '👥',
-      level: 'Beginner',
-      format: 'Interactive Guide'
+      title: t('scam'),
+      description: t('scam_desc'),
+      icon: '📵',
+      level: t('basic_skills'),
+      format: t('safety')
     },
     {
-      title: 'Accessibility Tools',
-      description: 'Features and tools to make digital devices easier to use.',
+      title: t('oku'),
+      description: t('oku_desc'),
       icon: '♿',
-      level: 'All Levels',
-      format: 'Resource Library'
+      level: t('basic_skills'),
+      format: t('accessibility')
     }
   ];
-  
+
   const levelColors = {
-    'Beginner': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100',
-    'Intermediate': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100',
-    'Advanced': 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100',
-    'All Levels': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100'
+    [t('basic_skills')]: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100',
+    [t('online_safety')]: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100',
+    [t('digital_tools')]: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100',
+    [t('practice_exercises')]: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100'
   };
-  
+
   const formatColors = {
-    'Video Tutorials': 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-100',
-    'Interactive Guide': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100',
-    'Online Course': 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-100',
-    'Step-by-step Guide': 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-100',
-    'Hands-on Workshop': 'bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-100',
-    'Resource Library': 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-100'
+    [t('digital_tools')]: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-100',
+    [t('practice_exercises')]: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100',
+    [t('online_safety')]: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-100',
+    [t('basic_skills')]: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-100',
+    [t('safety')]: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100',
+    [t('accessibility')]: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100'
   };
 
   return (
@@ -86,9 +98,9 @@ const Digital = () => {
         <div className="inline-block p-3 bg-red-100 dark:bg-red-900 rounded-full mb-4">
           <span className="text-3xl">📱</span>
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('digital')}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('digital_title')}</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Learn essential digital skills and access technology resources designed for seniors and beginners.
+          {t('digital_intro')}
         </p>
       </div>
       
@@ -98,23 +110,17 @@ const Digital = () => {
           <div className="relative flex-1">
             <input 
               type="text" 
-              placeholder="Search digital resources..." 
-              className="w-full px-4 py-2 pr-10 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-kitacare-red"
+              placeholder={t('search_jobs')}
+              className="w-full px-4 py-2 pr-10 rounded-md dark:bg-gray-900 border border-border focus:outline-none focus:ring-2 focus:ring-kitacare-red"
             />
             <span className="absolute right-3 top-2.5">🔍</span>
           </div>
-          <select className="px-4 py-2 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-kitacare-red">
-            <option value="">All Levels</option>
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-          </select>
-          <select className="px-4 py-2 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-kitacare-red">
-            <option value="">All Formats</option>
-            <option value="video">Video Tutorials</option>
-            <option value="guide">Interactive Guides</option>
-            <option value="course">Online Courses</option>
-            <option value="workshop">Workshops</option>
+          <select className="px-4 py-2 rounded-md border border-border focus:outline-none dark:bg-gray-900 focus:ring-2 focus:ring-kitacare-red">
+            <option value="">{t('Any')}</option>
+            <option value="video">{t('digital_tools')}</option>
+            <option value="guide">{t('practice_exercises')}</option>
+            <option value="course">{t('online_safety')}</option>
+            <option value="workshop">{t('accessibility')}</option>
           </select>
         </div>
       </div>
@@ -138,7 +144,7 @@ const Digital = () => {
                   </span>
                 </div>
               </div>
-              
+
               <h3 className="text-lg font-bold mb-2">{resource.title}</h3>
               <p className="text-muted-foreground text-sm mb-4">{resource.description}</p>
               
@@ -146,15 +152,24 @@ const Digital = () => {
                 <span className={`text-xs px-2 py-1 rounded-md ${formatColors[resource.format]}`}>
                   {resource.format}
                 </span>
-                <button className="text-kitacare-red hover:underline text-sm font-medium">
-                  Start Learning
+                <button 
+                  onClick={resource.onClick}
+                  className="text-kitacare-red hover:underline text-sm font-medium bg-red-100 dark:bg-red-900 dark:text-white px-4 py-2 rounded-md"
+                >
+                  {t('get_started')}
                 </button>
               </div>
             </div>
             
             {/* Hover Reveal Progress Bar */}
-            <div className="h-1 bg-gray-200 dark:bg-gray-700 w-full">
-              <div className="h-full bg-kitacare-red origin-left transform scale-x-0 group-hover:scale-x-50 transition-transform duration-300"></div>
+            <div className="absolute bottom-0 left-0 h-1 bg-gray-200 dark:bg-gray-700 w-full">
+              <div 
+                className="h-full bg-kitacare-red origin-left transition-transform duration-300"
+                style={{ 
+                  transform: `scaleX(${resource.progress ? resource.progress / 100 : 0})`,
+                  transition: 'transform 0.3s ease-in-out'
+                }}
+              ></div>
             </div>
           </div>
         ))}
@@ -164,15 +179,15 @@ const Digital = () => {
       <div className="mt-16 bg-gradient-to-r from-kitacare-red to-kitacare-orange rounded-xl p-6 md:p-8 text-white max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row gap-8 items-center">
           <div className="flex-1 space-y-4">
-            <span className="bg-white text-kitacare-red px-3 py-1 rounded-full text-xs font-medium">Featured Program</span>
-            <h2 className="text-2xl md:text-3xl font-bold">Digital Skills for Seniors</h2>
-            <p>Join our free 4-week training program to learn essential digital skills in a supportive environment. Classes available in multiple languages.</p>
+            <span className="bg-white text-kitacare-red px-3 py-1 rounded-full text-xs font-medium">{t('digital_title')}</span>
+            <h2 className="text-2xl md:text-3xl font-bold">{t('digital_title')}</h2>
+            <p>{t('digital_intro')}</p>
             <div className="flex flex-wrap gap-3">
               <button className="bg-white text-kitacare-red px-6 py-2 rounded-md hover:bg-opacity-90 transition-colors font-medium">
-                Register Now
+                {t('get_started')}
               </button>
               <button className="border-2 border-white text-white px-6 py-2 rounded-md hover:bg-white hover:bg-opacity-10 transition-colors font-medium">
-                Learn More
+                {t('learn_more')}
               </button>
             </div>
           </div>
@@ -181,15 +196,7 @@ const Digital = () => {
       </div>
       
       {/* Support Section */}
-      <div className="mt-12 text-center">
-        <h3 className="text-xl font-bold mb-4">Need In-Person Assistance?</h3>
-        <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-          Visit our Digital Access Centers for personalized help with your digital devices and questions.
-        </p>
-        <button className="bg-secondary hover:bg-secondary/80 py-2 px-6 rounded-md transition-colors">
-          Find Nearby Center
-        </button>
-      </div>
+      
     </div>
   );
 };

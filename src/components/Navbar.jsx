@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useTheme } from '../contexts/ThemeContext';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import ThemeToggle from './ThemeToggle';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -9,12 +9,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sun, Moon, Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useTheme();
   const { currentLanguage, languages, changeLanguage, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const navLinks = [
     { name: t('government_services'), path: '/government-services', icon: '🏛️' },
@@ -23,6 +23,10 @@ const Navbar = () => {
     { name: t('employment'), path: '/employment', icon: '💼' },
     { name: t('digital'), path: '/digital', icon: '📱' },
   ];
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-background border-b border-border transition-colors duration-200">
@@ -41,10 +45,15 @@ const Navbar = () => {
             <Link 
               key={link.path} 
               to={link.path}
-              className="text-foreground hover:text-kitacare-purple transition-colors flex items-center gap-2 text-sm font-medium"
+              className={`relative text-foreground hover:text-kitacare-blue transition-colors flex items-center gap-2 text-sm font-medium ${
+                isActive(link.path) ? 'text-kitacare-blue' : ''
+              }`}
             >
               <span>{link.icon}</span>
               <span>{link.name}</span>
+              {isActive(link.path) && (
+                <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-kitacare-blue rounded-full" />
+              )}
             </Link>
           ))}
         </div>
@@ -54,7 +63,13 @@ const Navbar = () => {
           {/* Language Selector */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full text-foreground hover:bg-accent">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className={`rounded-full text-foreground hover:bg-accent ${
+                  currentLanguage ? 'bg-accent/50' : ''
+                }`}
+              >
                 <Globe className="h-5 w-5" />
                 <span className="sr-only">Change Language</span>
               </Button>
@@ -64,7 +79,11 @@ const Navbar = () => {
                 <DropdownMenuItem 
                   key={lang.code} 
                   onClick={() => changeLanguage(lang.code)}
-                  className={`${currentLanguage === lang.code ? "bg-accent" : ""} text-foreground`}
+                  className={`${
+                    currentLanguage === lang.code 
+                      ? "bg-accent text-foreground" 
+                      : "text-foreground hover:bg-accent/50"
+                  }`}
                 >
                   <span className="mr-2">{lang.flag}</span>
                   <span>{lang.name}</span>
@@ -74,19 +93,9 @@ const Navbar = () => {
           </DropdownMenu>
           
           {/* Theme Toggle */}
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={toggleTheme}
-            className="rounded-full text-foreground hover:bg-accent"
-          >
-            {theme === 'light' ? (
-              <Moon className="h-5 w-5" />
-            ) : (
-              <Sun className="h-5 w-5" />
-            )}
-            <span className="sr-only">Toggle theme</span>
-          </Button>
+          <div className="flex items-center">
+            <ThemeToggle />
+          </div>
           
           {/* Mobile Menu Button */}
           <Button 
@@ -113,11 +122,16 @@ const Navbar = () => {
               <Link 
                 key={link.path} 
                 to={link.path}
-                className="block py-3 text-foreground hover:text-kitacare-purple transition-colors flex items-center gap-2"
+                className={`block py-3 text-foreground hover:text-kitacare-blue transition-colors flex items-center gap-2 ${
+                  isActive(link.path) ? 'text-kitacare-blue' : ''
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span>{link.icon}</span>
                 <span>{link.name}</span>
+                {isActive(link.path) && (
+                  <div className="ml-2 w-2 h-2 bg-kitacare-blue rounded-full" />
+                )}
               </Link>
             ))}
           </div>

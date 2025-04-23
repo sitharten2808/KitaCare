@@ -1,48 +1,39 @@
-
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Card } from '@/components/ui/card';
+import { useNavigate } from 'react-router-dom';
 
 const Employment = () => {
   const { t } = useLanguage();
-  
+  const navigate = useNavigate();
   const services = [
     {
-      title: 'Job Matching for Seniors',
-      description: 'Connect with age-friendly employers and find suitable part-time jobs.',
+      title: t('search_jobs'),
+      description: t('employment_desc'),
       icon: '👨‍💼',
-      steps: ['Register profile', 'Complete skills assessment', 'Browse opportunities', 'Apply with assistance']
+      steps: [t('get_started'), t('learn_more'), t('find_support'), t('contact')],
+      onClick: () => navigate('/careers')
     },
     {
-      title: 'Skills Training Programs',
-      description: 'Free and subsidized courses to learn new skills and enhance employability.',
+      title: t('training'),
+      description: t('employment_desc'),
       icon: '🎓',
-      steps: ['Check eligibility', 'Browse available courses', 'Apply for funding', 'Complete training']
+      steps: [t('get_started'), t('learn_more'), t('find_support'), t('contact')]
     },
+    
     {
-      title: 'Financial Aid Applications',
-      description: 'Apply for government financial assistance programs for low-income families.',
-      icon: '💰',
-      steps: ['Check eligibility', 'Gather documents', 'Complete application', 'Track status']
-    },
-    {
-      title: 'Retirement Planning',
-      description: 'Resources and consultations to plan for a financially secure retirement.',
+      title: t('career_resources'),
+      description: t('employment_desc'),
       icon: '📅',
-      steps: ['Schedule assessment', 'Review current finances', 'Explore options', 'Create plan']
+      steps: [t('get_started'), t('learn_more'), t('find_support'), t('contact')]
     },
     {
-      title: 'Small Business Support',
-      description: 'Help for seniors wanting to start small businesses or home-based work.',
+      title: t('employment'),
+      description: t('employment_desc'),
       icon: '🏪',
-      steps: ['Validate idea', 'Create business plan', 'Apply for startup grant', 'Launch with mentoring']
+      steps: [t('get_started'), t('learn_more'), t('find_support'), t('contact')]
     },
-    {
-      title: 'Pension & Benefits Guidance',
-      description: 'Assistance with navigating pension systems and claiming rightful benefits.',
-      icon: '📑',
-      steps: ['Document review', 'Eligibility check', 'Application assistance', 'Follow-up support']
-    }
+   
   ];
 
   return (
@@ -51,9 +42,9 @@ const Employment = () => {
         <div className="inline-block p-3 bg-orange-100 dark:bg-orange-900 rounded-full mb-4">
           <span className="text-3xl">💼</span>
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('employment')}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('employment_title')}</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Discover job opportunities, training programs, and financial assistance for seniors and low-income families.
+          {t('employment_intro')}
         </p>
       </div>
       
@@ -77,7 +68,7 @@ const Employment = () => {
               
               {/* Steps */}
               <div className="mb-6">
-                <h4 className="font-semibold mb-3 text-sm uppercase text-muted-foreground">How It Works</h4>
+                <h4 className="font-semibold mb-3 text-sm uppercase text-muted-foreground">{t('how_it_helps')}</h4>
                 <div className="flex flex-col gap-2">
                   {service.steps.map((step, i) => (
                     <div key={i} className="flex items-center gap-3">
@@ -92,8 +83,10 @@ const Employment = () => {
               
               {/* Action Button */}
               <div className="mt-auto">
-                <button className="w-full bg-kitacare-orange text-white py-2 rounded-md group-hover:bg-orange-600 transition-colors">
-                  Access Service
+                <button className="w-full bg-kitacare-orange text-white py-2 rounded-md group-hover:bg-orange-600 transition-colors"
+                onClick={service.onClick}
+                >
+                  {t('learn_more')}
                 </button>
               </div>
             </div>
@@ -110,12 +103,12 @@ const Employment = () => {
             </div>
           </div>
           <div>
-            <h2 className="text-2xl font-bold mb-2">Need Personalized Help?</h2>
+            <h2 className="text-2xl font-bold mb-2">{t('find_support')}</h2>
             <p className="text-muted-foreground mb-4">
-              Schedule a one-on-one consultation with our employment advisors who can provide customized guidance.
+              {t('employment_intro')}
             </p>
             <button className="bg-kitacare-orange text-white px-6 py-2 rounded-md hover:bg-orange-600 transition-colors">
-              Book Appointment
+              {t('appointment')}
             </button>
           </div>
         </div>

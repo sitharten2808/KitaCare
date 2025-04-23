@@ -132,7 +132,7 @@ export default {
       },
       fontFamily: {
         body: ['Open Sans', 'system-ui', 'sans-serif'],
-        heading: ['Special Gothic Expanded One', 'serif'],
+        heading: ['Poppins', 'sans-serif'],
       }
     }
   },
